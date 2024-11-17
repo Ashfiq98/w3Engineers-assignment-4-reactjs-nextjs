@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import React from "react";
+import { useEffect, useState } from "react";
 
 type Props = {};
 
-export default function Navbar({}: Props) {
+export default function Navbar({ }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("US");
@@ -65,9 +64,8 @@ export default function Navbar({}: Props) {
             {/* Globe Icon and Region Text */}
             <a
               href="#"
-              className={`flex items-center text-gray-600 hover:text-gray-800 ${
-                isModalOpen ? "pointer-events-none" : ""
-              }`}
+              className={`flex items-center text-gray-800 hover:text-gray-800 ${isModalOpen ? "pointer-events-none" : ""
+                }`}
               onClick={() => {
                 if (!isModalOpen) {
                   setIsModalOpen(true); // Open modal when clicking the globe icon
@@ -78,19 +76,19 @@ export default function Navbar({}: Props) {
               &nbsp;{regionText}
             </a>
             <div className="hidden md:flex space-x-6">
-              <a href="#" className="text-gray-600 hover:text-gray-800">
+              <a href="#" className="text-gray-600 hover:text-gray-900">
                 Trip Boards
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800">
+              <a href="#" className="text-gray-600 hover:text-gray-900">
                 List your property
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800">
+              <a href="#" className="text-gray-600 hover:text-gray-900">
                 Help
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800">
+              <a href="#" className="text-gray-600 hover:text-gray-900">
                 My trips
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800">
+              <a href="#" className="text-gray-600 hover:text-gray-900">
                 Sign in
               </a>
             </div>
@@ -108,19 +106,19 @@ export default function Navbar({}: Props) {
         {isOpen && !isModalOpen && (
           <div className="md:hidden bg-white shadow-md z-10">
             <div className="space-y-2 p-4">
-              <a href="#" className="block text-gray-600 hover:text-gray-800">
+              <a href="#" className="block text-gray-600 hover:text-gray-900">
                 Trip Boards
               </a>
-              <a href="#" className="block text-gray-600 hover:text-gray-800">
+              <a href="#" className="block text-gray-600 hover:text-gray-900">
                 List your property
               </a>
-              <a href="#" className="block text-gray-600 hover:text-gray-800">
+              <a href="#" className="block text-gray-600 hover:text-gray-900">
                 Help
               </a>
-              <a href="#" className="block text-gray-600 hover:text-gray-800">
+              <a href="#" className="block text-gray-600 hover:text-gray-900">
                 My trips
               </a>
-              <a href="#" className="block text-gray-600 hover:text-gray-800">
+              <a href="#" className="block text-gray-600 hover:text-gray-900">
                 Sign in
               </a>
             </div>
@@ -132,7 +130,7 @@ export default function Navbar({}: Props) {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-20">
           <div className="bg-white p-6 rounded shadow-lg w-80">
-            <h2 className="text-xl font-semibold mb-4">Select Region and Currency</h2>
+            <h2 className="text-xl text-gray-800 font-semibold mb-4">Select Region and Currency</h2>
 
             {/* Region Dropdown */}
             <div className="mb-4">
@@ -140,7 +138,7 @@ export default function Navbar({}: Props) {
               <select
                 value={tempRegion} // Use the temporary state
                 onChange={(e) => handleRegionChange(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-2 border text-gray-800 border-gray-300 rounded"
               >
                 <option value="US">United States</option>
                 <option value="ES">Spain</option>
@@ -156,7 +154,7 @@ export default function Navbar({}: Props) {
                 type="text"
                 value={tempCurrency} // Use the temporary state
                 disabled
-                className="w-full p-2 border border-gray-300 rounded bg-gray-200"
+                className="w-full p-2 border text-gray-800 border-gray-300 rounded bg-gray-200"
               />
             </div>
 

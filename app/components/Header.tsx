@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function Header() {
   const images = [
     "./images/header-1.jpg",
     "./images/header-4.jpg",
     "./images/header-3.jpg",
-    "./images/header-5.jpg",
-    "./images/header-6.jpeg",
+    "./images/header-2.jpeg",
+    "./images/header-7.jpg",
   ];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -34,10 +34,10 @@ export default function Header() {
   return (
     <div className="container mx-auto px-4">
       {/* Grid container for larger screens */}
-      <div className="hidden md:grid grid-cols-12 gap-4">
+      <div className="hidden md:grid grid-cols-12 gap-2">
         {/* Single Photo Section */}
         <div className="col-span-6">
-          <div className="relative h-80 w-full">
+          <div className="relative h-100 w-full">
             <img
               src={images[0]}
               alt="Main Image"
@@ -47,13 +47,13 @@ export default function Header() {
         </div>
 
         {/* Four Photos Section */}
-        <div className="col-span-6 grid grid-cols-2 gap-4">
-          {images.slice(0, 4).map((image, index) => (
-            <div key={index} className="relative h-40 w-full">
+        <div className="col-span-6 grid grid-cols-2 gap-2">
+          {images.slice(1, 5).map((image, index) => (
+            <div key={index} className="relative h-50 w-full">
               <img
                 src={image}
                 alt={`Photo ${index + 1}`}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h- object-cover rounded-lg"
               />
               {index === 3 && (
                 <button
@@ -103,7 +103,29 @@ export default function Header() {
             >
               &times;
             </button>
-            <div className="grid grid-cols-3 gap-4">
+
+            <div className="relative h-80 w-full">
+              <img
+                src={images[currentSlide]}
+                alt={`Slide ${currentSlide + 1}`}
+                className="w-full h-full object-cover rounded-lg"
+              />
+              <div className="absolute inset-0 flex justify-between items-center">
+                <button
+                  onClick={prevSlide}
+                  className="bg-black text-white p-2 ml-2 rounded"
+                >
+                  <i className="fa-solid fa-arrow-left"></i>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="bg-black text-white p-2 mr-2 rounded"
+                >
+                  <i className="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+            {/* <div className="grid grid-cols-3 gap-4">
               {images.map((image, index) => (
                 <div key={index} className="h-40 w-full">
                   <img
@@ -113,7 +135,7 @@ export default function Header() {
                   />
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       )}
