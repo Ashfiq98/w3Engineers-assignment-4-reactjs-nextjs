@@ -1,6 +1,35 @@
 "use client";
-
+import { useState,useEffect } from "react";
 export default function Amenities() {
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [adultCount, setAdultCount] = useState<number>(0);
+    const [childCount, setChildCount] = useState<number>(0);
+  
+    useEffect(() => {
+      // Load traveler counts from localStorage
+      const storedAdultCount = parseInt(localStorage.getItem("adultCount") || "0");
+      const storedChildCount = parseInt(localStorage.getItem("childCount") || "0");
+      setAdultCount(storedAdultCount);
+      setChildCount(storedChildCount);
+    }, []);
+  
+    const handleTravelerChange = (type: "adult" | "child", action: "increment" | "decrement") => {
+      if (type === "adult") {
+        const newCount = action === "increment" ? adultCount + 1 : Math.max(adultCount - 1, 0);
+        setAdultCount(newCount);
+        localStorage.setItem("adultCount", newCount.toString());
+      } else if (type === "child") {
+        const newCount = action === "increment" ? childCount + 1 : Math.max(childCount - 1, 0);
+        setChildCount(newCount);
+        localStorage.setItem("childCount", newCount.toString());
+      }
+    };
+  
+    const handleDone = () => {
+      const totalTravelers = adultCount + childCount;
+      localStorage.setItem("totalTravelers", totalTravelers.toString());
+      setModalVisible(false);
+    };
     return (
         <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
             {/* Main Content */}
@@ -302,64 +331,127 @@ Evolve makes it easy to find and book properties you'll never want to leave. You
             </div>
 
             {/* Booking Card */}
-            <div className="w-full lg:w-96">
-                <div className="bg-white rounded-lg shadow-lg p-6 sticky top-4">
-                    <div className="bg-blue-50 p-4 rounded-lg mb-4 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <div className="flex gap-1">
-                                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                            </div>
-                            <span className="text-sm">Members get our best prices when signed in!</span>
-                        </div>
-                        <button className="text-blue-600 ">Login</button>
-                    </div>
+            <div className="p-4 border rounded-md shadow-md bg-white">
+      {/* Member Banner */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="w-2 h-2 bg-gray-400 rounded-full"></div>
+            ))}
+          </div>
+          <span className="text-gray-700">Members get our best prices when signed in!</span>
+        </div>
+        <button className="px-4 py-2 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600">
+          Sign in
+        </button>
+      </div>
 
-                    <div className="mb-6">
-                        <div className="text-2xl font-bold mb-2">
-                            $134 <span className="text-base font-normal text-gray-600">per night</span>
-                        </div>
-                        <div className="text-green-600 mb-2">✓ Free cancellation</div>
-                        <div className="text-gray-600">Before Mon, Nov 4</div>
-                    </div>
+      {/* Booking Card */}
+      <div>
+        <div className="text-lg font-bold">$134 <span className="text-sm font-normal">per night</span></div>
+        <div className="mt-2 text-sm text-gray-600">
+          ✓ Free cancellation <span className="text-gray-400">Before Mon, Nov 4</span>
+        </div>
+        <div className="mt-2 text-sm text-gray-600">✓ Your dates are available</div>
 
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="border rounded-lg p-3">
-                            <small className="text-gray-600">Start date</small>
-                            <div className="font-medium">Nov 18</div>
-                        </div>
-                        <div className="border rounded-lg p-3">
-                            <small className="text-gray-600">End date</small>
-                            <div className="font-medium">Nov 20</div>
-                        </div>
-                    </div>
+        {/* Date Picker */}
+        <div className="flex justify-between gap-4 mt-4">
+          <div className="p-2 border rounded-md">
+            <small className="block text-xs text-gray-500">Start date</small>
+            <div>Nov 18</div>
+          </div>
+          <div className="p-2 border rounded-md">
+            <small className="block text-xs text-gray-500">End date</small>
+            <div>Nov 20</div>
+          </div>
+        </div>
 
-                    <button className="w-full border rounded-lg p-3 text-left mb-4">
-                        <small className="text-gray-600">Travelers</small>
-                        <div className="font-medium">0 travelers</div>
-                    </button>
+        {/* Travelers Button */}
+        <button
+          onClick={() => setModalVisible(true)}
+          className="w-full p-2 mt-4 border rounded-md text-left"
+        >
+          <small className="block text-xs text-gray-500">Travelers</small>
+          <div><span className="count-traveler">{adultCount + childCount}</span> travelers</div>
+        </button>
 
-                    <div className="flex justify-between items-center mb-4 py-4 border-t border-b">
-                        <span className="font-medium">Total</span>
-                        <span className="font-bold">$543</span>
-                    </div>
-
-                    <button className="w-full bg-blue-600 text-white py-3 rounded-lg mb-2">
-                        Book now
-                    </button>
-                    <p className="text-center text-sm text-gray-600 mb-4">You will not be charged yet</p>
-
-                    <button className="w-full border border-blue-600 text-blue-600 py-3 rounded-lg mb-4">
-                        Contact host
-                    </button>
-
-                    <p className="text-center text-sm text-gray-600">Property # 9838104ha</p>
+        {/* Modal */}
+        {modalVisible && (
+          <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="p-4 bg-white rounded-md shadow-md w-80">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold">Travelers</h2>
+                <button onClick={() => setModalVisible(false)} className="text-lg font-bold">×</button>
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Adults</label>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleTravelerChange("adult", "decrement")}
+                    className="px-3 py-1 border rounded-md"
+                  >-</button>
+                  <input
+                    type="text"
+                    value={adultCount}
+                    readOnly
+                    className="w-12 text-center border rounded-md"
+                  />
+                  <button
+                    onClick={() => handleTravelerChange("adult", "increment")}
+                    className="px-3 py-1 border rounded-md"
+                  >+</button>
                 </div>
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Children (Ages 0 to 17)</label>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleTravelerChange("child", "decrement")}
+                    className="px-3 py-1 border rounded-md"
+                  >-</button>
+                  <input
+                    type="text"
+                    value={childCount}
+                    readOnly
+                    className="w-12 text-center border rounded-md"
+                  />
+                  <button
+                    onClick={() => handleTravelerChange("child", "increment")}
+                    className="px-3 py-1 border rounded-md"
+                  >+</button>
+                </div>
+              </div>
+              <button
+                onClick={handleDone}
+                className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+              >
+                Done
+              </button>
             </div>
+          </div>
+        )}
 
-            {/* question card */}
+        {/* Total Section */}
+        <div className="flex justify-between mt-4">
+          <span>Total</span>
+          <span>$543</span>
+        </div>
+        <div className="text-right text-sm text-gray-500">
+          Total includes fees, not tax <a href="#" className="text-blue-500">Price details</a>
+        </div>
+
+        {/* Booking Button */}
+        <button className="w-full p-2 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600">
+          Book now
+        </button>
+        <div className="mt-2 text-sm text-gray-500">You will not be charged yet</div>
+
+        {/* Contact Host */}
+        <a href="#" className="block mt-4 text-sm text-blue-500">Contact host</a>
+        <div className="mt-2 text-sm text-gray-400">Property # 9838104ha</div>
+      </div>
+    </div>
             
         </div>
     );
