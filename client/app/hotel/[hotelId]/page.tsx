@@ -1,12 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Navbar from '@/app/components/Navbar';
-import Subheader from '@/app/components/Subheader';
-import Header from '@/app/components/Header';
-import Pagination from '@/app/components/Pagination';
 import Amenities from '@/app/components/Amenities';
+import Footer from '@/app/components/Footer';
+import Header from '@/app/components/Header';
+import Navbar from '@/app/components/Navbar';
+import Pagination from '@/app/components/Pagination';
+import QuestionCard from '@/app/components/QuestionCard';
+import RulesAndInfo from '@/app/components/RulesAndInfo';
+import Subheader from '@/app/components/Subheader';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface HotelData {
   hotelId: string;
@@ -94,61 +97,14 @@ export default function HotelPage() {
   }
 
   return (<>
-    <Navbar/>
-    <Subheader/>
-    <Header images={hotel.images}/>
-    <Pagination/>
-    {/* <Amenities/> */}
-    {/* <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-4">{hotel.title}</h1>
-      <p className="text-gray-700 mb-4">{hotel.description}</p>
-      <p className="text-gray-600 mb-2">Address: {hotel.address}</p>
-      <p className="text-gray-600 mb-2">Location: {hotel.location}</p>
-      <p className="text-gray-600 mb-2">Host: {hotel.host.name} ({hotel.host.contact})</p>
-
-      <h2 className="text-2xl font-semibold mb-4">Amenities</h2>
-      <ul className="list-disc pl-6 mb-4">
-        {hotel.amenities.map((amenity, index) => (
-          <li key={index} className="text-gray-700">
-            {amenity}
-          </li>
-        ))}
-      </ul>
-
-      <h2 className="text-2xl font-semibold mb-4">Images</h2>
-      {hotel.images && hotel.images.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {hotel.images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Hotel Image ${index + 1}`}
-              className="rounded-lg shadow"
-            />
-          ))}
-        </div>
-      ) : (
-        <p>No images available for this hotel.</p>
-      )}
-
-      <h2 className="text-2xl font-semibold mb-4">Rooms</h2>
-      {hotel.rooms.map((room, index) => (
-        <div key={index} className="mb-6">
-          <h3 className="text-xl font-bold mb-2">{room.roomTitle}</h3>
-          <p>Bedrooms: {room.bedroomCount}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-            {room.roomImages.map((roomImage, idx) => (
-              <img
-                key={idx}
-                src={roomImage}
-                alt={`Room ${index + 1} Image ${idx + 1}`}
-                className="rounded-lg shadow"
-              />
-            ))}
-          </div>
-        </div>
-      ))}
-    </div> */}
-    </>
+    <Navbar />
+    <Subheader />
+    <Header images={hotel.images} title={hotel.title} />
+    <Pagination />
+    <Amenities HotelData={hotel} />
+    <QuestionCard />
+    <RulesAndInfo />
+    <Footer host={hotel.host} />
+  </>
   );
 }

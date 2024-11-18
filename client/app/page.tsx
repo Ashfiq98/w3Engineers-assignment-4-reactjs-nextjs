@@ -6,7 +6,6 @@ import Pagination from "./components/Pagination";
 import QuestionCard from "./components/QuestionCard";
 import RulesAndInfo from "./components/RulesAndInfo";
 import Subheader from "./components/Subheader";
-import Test from "./components/Test";
 
 export default function Home() {
   return (
@@ -14,14 +13,14 @@ export default function Home() {
       <Navbar />
       <Subheader />
       {/* for testing api */}
-      <Test/>
+      {/* <Test/> */}
       {/* for testing api */}
-      <Header />
+      <Header/>
       <Pagination />
       <Amenities />
-      <QuestionCard/>
-      <RulesAndInfo/>
-      <Footer/>
+      <QuestionCard />
+      <RulesAndInfo />
+      <Footer />
     </>
   );
 
