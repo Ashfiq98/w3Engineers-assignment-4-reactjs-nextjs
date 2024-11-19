@@ -3,7 +3,7 @@ import { body, validationResult } from 'express-validator';
 import fs from 'fs-extra';
 import slugify from 'slugify'; // Import slugify
 import { v4 as uuidv4 } from 'uuid'; // Import uuid
-import { addHotelToData, filePath, getHotelById, Hotel, updateHotelById, updateHotelImages } from '../models/hotelModel';
+import { addHotelToData, filePath, getHotelById, getHotelBySlug, Hotel, updateHotelById, updateHotelImages } from '../models/hotelModel';
 
 // Controller to add a new hotel
 
@@ -216,11 +216,49 @@ export const uploadRoomImages = async (req: Request, res: Response): Promise<voi
 export const getHotel = async (req: Request, res: Response): Promise<void> => {
   try {
     const hotelId = req.params.hotelId;  // Get hotelId from the URL parameter
-    
+    // const slug = req.params.slug;
+    // Fetch hotel data using the model function
+     const hotel = await getHotelById(hotelId);
+ 
+    if (!hotel) {
+      res.status(404).send('Hotel not found');
+      return;
+    }
+
+    // If the hotel has images, modify the URLs to be fully functional
+    if (hotel.images) {
+      hotel.images = hotel.images.map((image: string) => `${image}`);
+    }
+
+    // If the hotel has rooms, modify the room image URLs to be fully functional
+    if (hotel.rooms) {
+      hotel.rooms.forEach((room: any) => {
+        if (room.roomImage) {
+          room.roomImage = `${room.roomImage}`;
+        }
+      });
+    }
+
+    // Send the hotel data as the response
+    res.status(200).send({
+      message: 'Hotel data retrieved successfully',
+      hotelData: hotel,  // Return the specific hotel object
+    });
+  } catch (error: any) {
+    console.error(error);
+    res.status(400).send(error.message);
+  }
+};
+
+export const getHotelByIdAndSlugController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const hotelId = req.params.hotelId;  // Get hotelId from the URL parameter
+    const slug = req.params.slug;
     // Fetch hotel data using the model function
     const hotel = await getHotelById(hotelId);
+    const hotelSlug = await getHotelBySlug(slug);
 
-    if (!hotel) {
+    if (!hotel || !hotelSlug) {
       res.status(404).send('Hotel not found');
       return;
     }

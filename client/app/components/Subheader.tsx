@@ -38,10 +38,10 @@ export default function Subheader() {
             <div className="flex justify-between items-center">
                 <span className="text-blue-500 cursor-pointer"><i className="fa-solid fa-arrow-left text-blue-600"></i> &nbsp; See all properties</span>
                 <div className="flex gap-2">
-                    <button onClick={openModal} className="flex items-center text-blue-600 border border-blue-600 px-4 py-2 rounded">
+                    <button onClick={openModal} className="flex items-center text-blue-600 border border-gray-800 px-2 py-2 rounded-full">
                         <i className="fa-solid fa-arrow-up-from-bracket mr-2"></i> Share
                     </button>
-                    <button onClick={toggleLove} className="flex items-center text-red-500 border border-red-500 px-4 py-2 rounded">
+                    <button onClick={toggleLove} className="flex items-center text-red-500 border border-gray-800 px-2 py-2 rounded-full">
                         <i className={`fa ${isLoved ? 'fa-heart fill-love' : 'fa-regular fa-heart empty-love'}`}></i> &nbsp; Save
                     </button>
                 </div>

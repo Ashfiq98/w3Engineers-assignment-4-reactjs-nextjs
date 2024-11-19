@@ -2,8 +2,8 @@
 export default function QuestionCard() {
     return (
 
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-lg shadow-sm p-6 my-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-gray-200 rounded-lg shadow-sm p-6 my-8">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Have a question?

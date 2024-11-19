@@ -35,11 +35,13 @@ interface AmenitiesProps {
 export default function Amenities({ HotelData }: AmenitiesProps) {
 
   const handleOpenMap = () => {
-    // const mapUrl = `https://www.google.com/maps?q=${HotelData.coordinates.latitude},${HotelData.coordinates.longitude}`;
-    const mapUrl = "https://maps.app.goo.gl/dgpJmYFtuWeWjxoFA";
+    const mapUrl = `https://www.google.com/maps?q=${HotelData?.coordinates.latitude},${HotelData?.coordinates.longitude}`;
+    // const mapUrl = "https://maps.app.goo.gl/dgpJmYFtuWeWjxoFA";
     // const mapUrl=`https://www.google.com/maps`;
     window.open(mapUrl, "_blank");
   };
+  const mapImage = "https://www.researchgate.net/publication/370562909/figure/fig2/AS:11431281156113588@1683375142359/Google-Maps-tracks-Dhaka-traffic_Q320.jpg";
+  const propertyImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQexS1oqvGGDKBtboPvEuFveCUNvR-h0zTUJw&s";
   // Amenities 
   const amenities = HotelData?.amenities || [];
 
@@ -82,7 +84,7 @@ export default function Amenities({ HotelData }: AmenitiesProps) {
           <h1 className="text-2xl font-bold mb-4">{HotelData?.title || "Juneau Vacation Home: Stunning View + Beach"}</h1>
 
           <div className="flex items-center gap-4 mb-4">
-            <button className="bg-blue-600 text-white px-3 py-1 rounded-lg flex items-center">
+            <button className="bg-green-600 text-white px-3 py-1 rounded-lg flex items-center">
               9.8 &nbsp; <i className="fa-solid fa-star"></i>
             </button>
             <span className="text-gray-700">Exceptional</span>
@@ -103,7 +105,7 @@ export default function Amenities({ HotelData }: AmenitiesProps) {
               <span>Sleep {HotelData?.guestCount || "4"}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xl">🚾</span>
+              <span className="text-xl"><i className="fa-solid fa-shower"></i></span>
               <span>{HotelData?.bathroomCount || "1"} bathroom</span>
             </div>
             <div className="flex items-center gap-2">
@@ -149,7 +151,7 @@ export default function Amenities({ HotelData }: AmenitiesProps) {
           <div className="flex gap-8">
             <div className="w-1/3">
               <div className="bg-gray-100 rounded-lg overflow-hidden">
-                <img src="./images/dhaka-map.png" alt="Area map" className="w-full h-48 object-cover" />
+                <img src={mapImage}alt="Area map" className="w-full h-48 object-cover" />
                 <div className="p-4">
                   <h4 className="font-medium mb-2">Dhaka, Bangladesh</h4>
                   <a href="#" onClick={handleOpenMap} className="text-blue-600 hover:underline">view in map</a>
@@ -199,12 +201,14 @@ export default function Amenities({ HotelData }: AmenitiesProps) {
           </div>
           <div className="mt-6">
             <h3 className="text-lg font-semibold">1 Bathroom</h3>
-            <h5 className="text-md text-gray-700">Full Bathroom</h5>
+            <p className="text-3xl my-2"> <i className="fa-solid fa-shower"></i></p>
+            <h5 className="text-md text-gray-700">Full Bathroom </h5>
+          
           </div>
         </div>
 
         {/* Spaces */}
-        <div>
+        <div className="my-8">
           <h2 className="text-2xl font-bold mb-4">Spaces</h2>
           <div className="space-y-2">
             <div className="flex items-center text-gray-800">
@@ -250,7 +254,7 @@ export default function Amenities({ HotelData }: AmenitiesProps) {
 
         {/* about  */}
 
-        <div className="mb-8">
+        <div className="my-8">
           <h2 className="text-2xl font-bold mb-4">About this property</h2>
           <h3 className="text-lg font-semibold mb-4">
             {HotelData?.title || "Juneau Vacation Home: Stunning View + Beach"}
@@ -310,10 +314,10 @@ Evolve makes it easy to find and book properties you'll never want to leave. You
 
         {/* property manager */}
 
-        <div className="manager-section flex flex-col items-center text-center mb-6">
+        <div className="manager-section flex flex-col mb-6">
           <div className="manager-icon mb-2">
             <img
-              src="./images/property-logo.png"
+              src={propertyImage}
               alt="Property Manager Logo"
               className="w-12 h-12"
             />

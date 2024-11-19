@@ -1,19 +1,20 @@
 "use client";
+import { title } from "process";
 import { useState } from "react";
 import React from 'react'
 type SectionKey = 'houseRules' | 'damage' | 'cancellation' | 'important' | 'faq' | null;
 
 interface Rule {
-  icon: string;
-  title: string;
-  desc: string;
+  icon?: string;
+  title?: string;
+  desc?: string;
 }
 
 interface Section {
-  title: string;
-  content: React.ReactNode;
+  title?: string;
+  content?: React.ReactNode;
 }
-export default function RulesAndInfo() {
+export default function RulesAndInfo({title}: Rule) {
     const [activeSection, setActiveSection] = useState<SectionKey>('houseRules');
 
     // Define sections inside the component
@@ -22,7 +23,7 @@ export default function RulesAndInfo() {
         title: "House Rules",
         content: (
           <div className="space-y-6">
-            <div className="flex flex-col md:flex-row justify-between text-sm mb-6">
+            <div className="flex flex-col md:flex-col justify-between text-sm mb-6">
               <div className="flex items-center space-x-2">
                 <span className="font-medium">Check in after</span>
                 <span className="text-blue-600">3:00 PM</span>
@@ -130,10 +131,10 @@ export default function RulesAndInfo() {
         content: (
           <div className="space-y-4">
             {[
-              'Is Juneau Vacation Home: Stunning View + Beach Access pet-friendly?',
-              'What time is check-in at Juneau Vacation Home: Stunning View + Beach Access?',
-              'What time is check-out at Juneau Vacation Home: Stunning View + Beach Access?',
-              'Where is Juneau Vacation Home: Stunning View + Beach Access located?'
+              `Is ${title ||'Juneau Vacation Home: Stunning View + Beach Access'} pet-friendly?`,
+              `What time is check-in at ${title ||'Juneau Vacation Home: Stunning View + Beach Access'} ?`,
+              `What time is check-out at ${title ||'Juneau Vacation Home: Stunning View + Beach Access'} ?`,
+              `Where is ${title ||'Juneau Vacation Home: Stunning View + Beach Access'}  located?`
             ].map((question, index) => (
               <button key={index} className="w-full text-left flex items-center gap-2 hover:bg-gray-50 p-2 rounded">
                 <span className="text-gray-400">▼</span>

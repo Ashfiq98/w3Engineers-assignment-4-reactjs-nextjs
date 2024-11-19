@@ -12,7 +12,7 @@ export const addHotelToData = async (newHotel: any): Promise<any> => {
 
     // Add the new hotel to the hotels data array
     hotelsData.push(newHotel);
-
+    
     // Save the updated hotels data back to the JSON file
     await fs.writeJson(filePath, hotelsData, { spaces: 2 });
 
@@ -35,10 +35,6 @@ const uploadDirectory = path.join(__dirname, '../uploads');
 fs.ensureDirSync(uploadDirectory);
 
 
-export const getHotelById = async (hotelId: string) => {
-  const hotels = await getHotels();
-  return hotels.find((hotel) => hotel.hotelId === hotelId);
-};
 
 export const updateHotelImages = async (hotelId: string, imageUrls: string[]) => {
   const hotels = await getHotels();
@@ -63,6 +59,16 @@ export interface Hotel {
 
 
 // GET Hotel Information
+export const getHotelById = async (hotelId: string) => {
+  const hotels = await getHotels();
+  return hotels.find((hotel) => hotel.hotelId === hotelId);
+};
+
+export const getHotelBySlug = async (slug: string) => {
+  const hotels = await getHotels();
+  return hotels.find((hotel) => hotel.slug === slug);
+};
+
 export const getHotels = async (): Promise<any[]> => {
   if (await fs.pathExists(filePath)) {
     const fileContent = await fs.readFile(filePath, 'utf-8');

@@ -56,19 +56,19 @@ export default function Footer({ host }: host) {
       </div>
 
       {/* About Host */}
-      <div className="mt-8">
+      <div className="mt-8 text-center">
         <h2 className="text-xl font-bold mb-2">About the host</h2>
         <p className="text-gray-700">Hosted by {host?.name}</p>
       </div>
 
       {/* Languages Section */}
-      <div className="mt-8">
+      <div className="mt-8 text-center">
         <h3 className="text-lg font-semibold mb-2">Languages:</h3>
         <p className="text-gray-700">English, French, German, Spanish</p>
       </div>
 
       {/* Contact Section */}
-      <div className="mt-8">
+      <div className="mt-8 text-center">
         <h2 className="text-xl font-bold mb-2">Send the message</h2>
         <a
           href="#"
