@@ -18,6 +18,8 @@ Before running this project, make sure you have:
 - Node.js (latest stable version)
 - npm (comes with Node.js)
 - Git
+## 📋 README for backend is inside server folder
+
 
 ## 🛠️ Installation
 
