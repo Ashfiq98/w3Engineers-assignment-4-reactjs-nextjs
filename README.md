@@ -121,14 +121,3 @@ Note: Unit tests are currently in development and may not have 100% coverage.
 
 Feel free to open issues and pull requests for any improvements you want to add.
 
-## 📝 License
-
-[Add your license information here]
-
-## 👤 Author
-
-[Add your author information here]
-
-## ✨ Acknowledgments
-
-[Add any acknowledgments here]
