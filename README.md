@@ -24,19 +24,27 @@ Before running this project, make sure you have:
 1. Clone the repository:
 ```bash
 git clone https://github.com/Ashfiq98/w3Engineers-assignment-4-reactjs-nextjs.git
+```
+```bash
 cd w3Engineers-assignment-4-reactjs-nextjs
 ```
 
 2. Install dependencies for client:
 ```bash
 cd client
+```
+```bash
 npm install
 ```
 
 3. Start the backend server:
 ```bash
 cd server
+```
+```bash
 npm install
+```
+```bash
 npm run dev
 ```
 
