@@ -7,7 +7,7 @@ import hotelRoutes from './routes/hotelRoutes';
 import cors from 'cors';
 
 export const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 // backend connection - start
 

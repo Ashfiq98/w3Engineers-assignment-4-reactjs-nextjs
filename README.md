@@ -36,7 +36,7 @@ cd w3Engineers-assignment-4-reactjs-nextjs
 cd client
 ```
 ```bash
-npm install
+npm install --force
 ```
 
 3. Start the backend server:
@@ -56,8 +56,8 @@ npm run dev
 ```
 
 The application will be running on:
-- Frontend: http://localhost:3001
-- Backend: http://localhost:3000
+- Frontend: http://localhost:3000
+- Backend: http://localhost:3001
 
 ## 🏗️ Project Structure
 
@@ -80,6 +80,8 @@ The application will be running on:
 
 - Home Page: `/`
 - Hotel Details: `/hotel-details/{slug}/{hotelId}`
+     you can get data with this sample:
+  - `/hotel-details/city-central-hotel/b9e1a815-434f-48dd-b2c0-a43146c54d56`,
   - Displays hotel information based on the provided slug and ID
   - Shows custom 404 page for invalid routes
 
